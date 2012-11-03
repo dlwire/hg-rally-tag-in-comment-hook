@@ -15,7 +15,7 @@ def hook_entry_point(ui, repo, node=None, **kwargs):
 def is_rally_tag_present(hg):
     tagPresent = False
     for comment in hg.get_incoming_comments():
-        tagPresent |= None != re.search(r'(US[0-9]+)', comment, re.I)
+        tagPresent |= None != re.search(r'([US|DE][0-9]+)', comment, re.I)
     return tagPresent
 
 class MercurialWrapper():
@@ -57,6 +57,12 @@ class is_rally_tag_present_test(unittest.TestCase):
         hg.add_incoming_comment('this is for US')
 
         self.assertFalse(is_rally_tag_present(hg))
+	
+    def test_when_defect_tag_present_return_true(self):
+        hg = MockMercurial()
+	hg.add_incoming_comment('DE123')
+
+	self.assertTrue(is_rally_tag_present(hg))
 
 		
 if __name__ == "__main__":

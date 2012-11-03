@@ -8,7 +8,7 @@ from subprocess import CalledProcessError
 @step(u'Given the rally tag in comment hook is enabled')
 def enable_rally_tag_in_comment_hook(step):
     with open('.hg/hgrc', 'w') as f:
-        f.writelines('[hooks]\npretxncommit.rally_tag_in_comment = python:~/workspace/hg-comment-hook/source/rally-tag-in-comment-hook.py:hook_entry_point\n')
+        f.writelines('[hooks]\npretxncommit.rally_tag_in_comment = python:~/workspace/hooks/hg-rally-tag-in-comment-hook/source/rally-tag-in-comment-hook.py:hook_entry_point\n')
 
 @step(u'When I commit a changest with the comment \'([^\']*)\'')
 def when_i_commit_a_changest_with_the_comment(step, tag):
